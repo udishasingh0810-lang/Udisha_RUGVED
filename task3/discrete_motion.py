@@ -67,18 +67,21 @@ plt.plot(xs, ys, marker="o", label="Trajectory")
 plt.scatter(xs[0], ys[0], marker="s", s=100, label="Start")
 plt.scatter(xs[-1], ys[-1], marker="X", s=100, label="End")
 
-for x_pos, y_pos, angle in trajectory:
+for i in range(len(trajectory) - 1):
+    x_pos, y_pos, angle = trajectory[i]
+
     angle_rad = math.radians(angle)
 
-    plt.quiver(
-        x_pos,
-        y_pos,
-        math.cos(angle_rad),
-        math.sin(angle_rad),
-        angles="xy",
-        scale_units="xy",
-        scale=1
-    )
+    if xs[i] != xs[i + 1] or ys[i] != ys[i + 1]:
+        plt.quiver(
+            x_pos,
+            y_pos,
+            math.cos(angle_rad),
+            math.sin(angle_rad),
+            angles="xy",
+            scale_units="xy",
+            scale=1
+        )
 
 plt.xlabel("X Position")
 plt.ylabel("Y Position")
